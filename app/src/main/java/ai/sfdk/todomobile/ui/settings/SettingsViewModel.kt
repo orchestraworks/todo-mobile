@@ -9,7 +9,8 @@ import kotlinx.coroutines.flow.update
 import java.net.URI
 
 data class SettingsState(
-    val baseUrlInput: String,
+    val currentBaseUrl: String,
+    val baseUrlInput: String = currentBaseUrl,
     val error: String? = null,
     val isSaved: Boolean = false,
 )
@@ -18,7 +19,7 @@ class SettingsViewModel(
     private val settings: SettingsRepository,
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(SettingsState(baseUrlInput = settings.baseUrl.value))
+    private val _state = MutableStateFlow(SettingsState(currentBaseUrl = settings.baseUrl.value))
     val state: StateFlow<SettingsState> = _state.asStateFlow()
 
     fun onBaseUrlChange(text: String) {
@@ -36,7 +37,7 @@ class SettingsViewModel(
             return
         }
         settings.setBaseUrl(candidate)
-        _state.update { it.copy(baseUrlInput = candidate, error = null, isSaved = true) }
+        _state.update { it.copy(currentBaseUrl = candidate, baseUrlInput = candidate, error = null, isSaved = true) }
     }
 
     private fun isValidBaseUrl(text: String): Boolean {

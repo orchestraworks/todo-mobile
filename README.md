@@ -11,7 +11,7 @@ An Android app for [todo-app](https://github.com/sfdk-ai/todo-app). It lists you
 
 - **Todos**: the list, newest first. Pull down to refresh, type in the search box to filter by title, scroll to load more, tap the box to mark a todo done, and tap + to add one.
 - **Todo**: one todo with its tags and creation time. Edit its title and tags, mark it done, or delete it.
-- **Settings** (the gear icon): the address of the todo-app API.
+- **Settings** (the gear icon): `API_BASE_URL`, the address of the todo-app API, with the value in use.
 
 ## What you need
 
@@ -39,9 +39,11 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 
 Start todo-app on your computer; see its README. It listens on port 3000 and serves its API under `/api`.
 
-The app's API address defaults to `http://10.0.2.2:3000/api`. Inside the Android emulator, `10.0.2.2` is your computer, so with todo-app running on your computer the emulator works without changing anything.
+The app's `API_BASE_URL` setting defaults to `http://10.0.2.2:3000/api`. Inside the Android emulator, `10.0.2.2` is your computer, so with todo-app running on your computer the emulator works without changing anything.
 
-To use another server, open Settings, type its API address, including `/api`, and tap Save. A phone is a separate device on your network, so it needs your computer's network address, such as `http://192.168.1.20:3000/api`, and both must be on the same network.
+To use another server, open Settings, type its address, including `/api`, into `API_BASE_URL`, and tap Save. A phone is a separate device on your network, so it needs your computer's network address, such as `http://192.168.1.20:3000/api`, and both must be on the same network.
+
+If the phone is redroid, Android in a Docker container on the same Linux machine as the server, it reaches the host at the Docker bridge gateway, usually `http://172.17.0.1:3000/api`, not `10.0.2.2`.
 
 The app talks plain HTTP, so it allows cleartext traffic.
 
@@ -61,7 +63,7 @@ GitHub Actions runs the tests and builds the debug APK on every push and pull re
 
 ## The API it uses
 
-Every route and JSON shape lives in one file, `app/src/main/java/ai/sfdk/todomobile/data/TodoApi.kt`. Routes are relative to the API address.
+Every route and JSON shape lives in one file, `app/src/main/java/ai/sfdk/todomobile/data/TodoApi.kt`. Routes are relative to `API_BASE_URL`, and errors come back as `{ "error": "message" }`.
 
 | Method | Route | Used for |
 | --- | --- | --- |
@@ -84,6 +86,6 @@ app/src/main/java/ai/sfdk/todomobile/
   ui/TodoNavHost.kt       navigation between the three screens
   ui/list/                the todo list
   ui/detail/              one todo, view and edit
-  ui/settings/            the API address
+  ui/settings/            the API_BASE_URL setting
 app/src/test/             unit tests
 ```

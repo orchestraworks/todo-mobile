@@ -37,7 +37,7 @@ class SettingsRepository(
         baseUrlState.value = url
         scope.launch {
             dataStore.edit { preferences ->
-                preferences[stringPreferencesKey("base_url")] = url
+                preferences[stringPreferencesKey("api_base_url")] = url
             }
         }
     }
@@ -45,6 +45,6 @@ class SettingsRepository(
     companion object {
         const val DEFAULT_BASE_URL = "http://10.0.2.2:3000/api"
 
-        private val BASE_URL_KEY = stringPreferencesKey("api_base_url")
+        private val BASE_URL_KEY = stringPreferencesKey("API_BASE_URL")
     }
 }

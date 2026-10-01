@@ -44,6 +44,7 @@ class SettingsViewModelTest {
     fun `starts from the current address`() {
         val viewModel = SettingsViewModel(settings)
 
+        assertEquals("http://10.0.2.2:3000/api", viewModel.state.value.currentBaseUrl)
         assertEquals("http://10.0.2.2:3000/api", viewModel.state.value.baseUrlInput)
         assertNull(viewModel.state.value.error)
     }
@@ -57,6 +58,7 @@ class SettingsViewModelTest {
 
         assertEquals("Enter an address that starts with http:// or https://", viewModel.state.value.error)
         assertFalse(viewModel.state.value.isSaved)
+        assertEquals("http://10.0.2.2:3000/api", viewModel.state.value.currentBaseUrl)
         assertEquals("http://10.0.2.2:3000/api", settings.baseUrl.value)
     }
 
@@ -79,6 +81,7 @@ class SettingsViewModelTest {
 
         assertTrue(viewModel.state.value.isSaved)
         assertEquals("http://192.168.1.20:3000/api", viewModel.state.value.baseUrlInput)
+        assertEquals("http://192.168.1.20:3000/api", viewModel.state.value.currentBaseUrl)
         assertEquals("http://192.168.1.20:3000/api", settings.baseUrl.value)
     }
 

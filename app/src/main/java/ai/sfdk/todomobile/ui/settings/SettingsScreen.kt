@@ -56,9 +56,9 @@ fun SettingsScreen(
             OutlinedTextField(
                 value = state.baseUrlInput,
                 onValueChange = viewModel::onBaseUrlChange,
-                label = { Text("API address") },
+                label = { Text("API_BASE_URL") },
                 supportingText = {
-                    Text(state.error ?: "The address of your todo-app server.")
+                    Text(state.error ?: "The todo-app API, including /api.")
                 },
                 isError = state.error != null,
                 singleLine = true,
@@ -73,6 +73,10 @@ fun SettingsScreen(
                     Text("Use default")
                 }
             }
+            Text(
+                text = "Current: ${state.currentBaseUrl}",
+                style = MaterialTheme.typography.bodyMedium,
+            )
             if (state.isSaved) {
                 Text(
                     text = "Saved.",
