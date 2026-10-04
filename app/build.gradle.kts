@@ -5,13 +5,13 @@ plugins {
 }
 
 android {
-    namespace = "ai.sfdk.todomobile"
+    namespace = "ai.orchestraworks.todomobile"
     compileSdk {
         version = release(37)
     }
 
     defaultConfig {
-        applicationId = "ai.sfdk.todomobile"
+        applicationId = "ai.orchestraworks.todomobile"
         minSdk {
             version = release(26)
         }

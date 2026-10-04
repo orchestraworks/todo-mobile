@@ -1,6 +1,6 @@
 # Todo for Android
 
-An Android app for [todo-app](https://github.com/sfdk-ai/todo-app). It lists your todos, searches them, and lets you add, edit, tag, complete and delete them. Everything it shows comes from a todo-app server over its REST API.
+An Android app for [todo-app](https://github.com/orchestraworks/todo-app). It lists your todos, searches them, and lets you add, edit, tag, complete and delete them. Everything it shows comes from a todo-app server over its REST API.
 
 - Kotlin and Jetpack Compose with Material 3
 - Retrofit with kotlinx.serialization for the API
@@ -63,7 +63,7 @@ GitHub Actions runs the tests and builds the debug APK on every push and pull re
 
 ## The API it uses
 
-Every route and JSON shape lives in one file, `app/src/main/java/ai/sfdk/todomobile/data/TodoApi.kt`. Routes are relative to `API_BASE_URL`, and errors come back as `{ "error": "message" }`.
+Every route and JSON shape lives in one file, `app/src/main/java/ai/orchestraworks/todomobile/data/TodoApi.kt`. Routes are relative to `API_BASE_URL`, and errors come back as `{ "error": "message" }`.
 
 | Method | Route | Used for |
 | --- | --- | --- |
@@ -78,7 +78,7 @@ Every route and JSON shape lives in one file, `app/src/main/java/ai/sfdk/todomob
 ## Project layout
 
 ```
-app/src/main/java/ai/sfdk/todomobile/
+app/src/main/java/ai/orchestraworks/todomobile/
   TodoApplication.kt      app start-up and shared objects
   MainActivity.kt
   data/TodoApi.kt         the API client and its JSON types
